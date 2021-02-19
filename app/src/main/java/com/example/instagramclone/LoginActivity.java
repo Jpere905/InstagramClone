@@ -47,8 +47,14 @@ public class LoginActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Log.i(TAG, "onClick login button");
+
                 String username = etUsername.getText().toString();
                 String password = etPassword.getText().toString();
+                if (username.isEmpty() || password.isEmpty()) {
+                    Toast.makeText(LoginActivity.this,
+                            "username or password cannot be empty", Toast.LENGTH_SHORT).show();
+                    return;
+                }
                 loginUser(username, password);
             }
         });
