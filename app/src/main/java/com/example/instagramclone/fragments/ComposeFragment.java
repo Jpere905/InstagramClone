@@ -87,8 +87,6 @@ public class ComposeFragment extends Fragment {
             }
         });
 
-        //queryPosts();
-
         // performs actions to submit the post
         btnSubmit.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -135,27 +133,6 @@ public class ComposeFragment extends Fragment {
                 etDescription.setText("");
                 // 0 is empty data, so it resets the image
                 ivPostImage.setImageResource(0);
-            }
-        });
-    }
-
-    // get a post from our posts database
-    private void queryPosts(){
-        ParseQuery<Post> query = ParseQuery.getQuery(Post.class);
-        query.include(Post.KEY_USER);
-        query.findInBackground(new FindCallback<Post>() {
-            @Override
-            public void done(List<Post> posts, ParseException e) {
-                if (e != null){
-                    Log.e(TAG, "Error with retrieving list of posts", e);
-                    return ;
-                }
-                // if reached this point, data fetch is successful, so iterate thru each post
-                for (Post post: posts){
-                    Log.i(TAG, "Post: " + post.getDescription() +
-                            ", Username: " + post.getUser().getUsername());
-                }
-
             }
         });
     }

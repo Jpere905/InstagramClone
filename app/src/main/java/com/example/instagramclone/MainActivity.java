@@ -26,6 +26,7 @@ import android.widget.Toast;
 
 import com.example.instagramclone.fragments.ComposeFragment;
 import com.example.instagramclone.fragments.PostsFragment;
+import com.example.instagramclone.fragments.ProfileFragment;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.parse.FindCallback;
 import com.parse.ParseException;
@@ -38,6 +39,9 @@ import java.io.File;
 import java.nio.channels.InterruptedByTimeoutException;
 import java.util.List;
 
+
+// unlike in other projects, this project only has ONE activity, MainActivity. But it still has
+// multiple views which we can do since we are using Fragments to create different screens
 public class MainActivity extends AppCompatActivity {
 
     public static final String TAG = "MainActivity";
@@ -59,16 +63,16 @@ public class MainActivity extends AppCompatActivity {
                 Fragment fragment;
                 switch(menuItem.getItemId()){
                     case R.id.action_home:
-                        Toast.makeText(MainActivity.this, "pressed home icon", Toast.LENGTH_SHORT).show();
+                        //Toast.makeText(MainActivity.this, "pressed home icon", Toast.LENGTH_SHORT).show();
                         fragment = new PostsFragment();
                         break;
                     case R.id.action_compose:
-                        Toast.makeText(MainActivity.this, "pressed compose icon", Toast.LENGTH_SHORT).show();
+                        //Toast.makeText(MainActivity.this, "pressed compose icon", Toast.LENGTH_SHORT).show();
                         fragment = new ComposeFragment();
                         break;
                     case R.id.action_profile:
-                        Toast.makeText(MainActivity.this, "pressed profile icon", Toast.LENGTH_SHORT).show();
-                        fragment = new ComposeFragment();
+                        //Toast.makeText(MainActivity.this, "pressed profile icon", Toast.LENGTH_SHORT).show();
+                        fragment = new ProfileFragment();
                         break;
                     default:
                         fragment = new ComposeFragment();
