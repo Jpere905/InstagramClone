@@ -18,9 +18,6 @@ The following **optional** features are implemented:
 
 - [x] User sees app icon in home screen and styled bottom navigation view
 
-The following **additional** features are implemented:
-
-- [ ] List anything else that you can get done to improve the app functionality!
 
 ## Video Walkthrough
 
