@@ -11,6 +11,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
+import com.example.instagramclone.fragments.PostsFragment;
 import com.parse.ParseFile;
 
 import java.util.List;
@@ -69,6 +70,20 @@ public class PostsAdapter extends RecyclerView.Adapter<PostsAdapter.ViewHolder> 
                 Glide.with(context).load(post.getImage().getUrl()).into(ivImage);
             }
         }
+    }
+
+    // for the swipe to refresh feature
+    // clear all elements from the recycler view
+    public void clear(){
+        posts.clear();
+        notifyDataSetChanged();
+    }
+
+    // add a list of items
+    public void addAll(List<Post> swipeToRefreshPosts){
+        posts.addAll(swipeToRefreshPosts);
+        notifyDataSetChanged();
+
     }
 
 }

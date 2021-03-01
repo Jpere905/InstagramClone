@@ -7,6 +7,7 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -29,13 +30,25 @@ public class PostsFragment extends Fragment {
     public static final String TAG = "PostsFragment";
     private RecyclerView rvPosts;
 
+    protected SwipeRefreshLayout swipeContainer;
+
     protected PostsAdapter adapter;
     protected List<Post> allPosts;
+
 
     public PostsFragment() {
         // Required empty public constructor
     }
 
+    // used for swiping to refresh
+
+//    swipeContainer = findViewById(R.id.swipeContainer);
+//        swipeContainer.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+//        @Override
+//        public void onRefresh() {
+//            Log.i(TAG, "swipe to refresh called...");
+//        }
+//    });
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -48,6 +61,15 @@ public class PostsFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         rvPosts = view.findViewById(R.id.rvPosts);
+
+        swipeContainer = view.findViewById(R.id.swipeContainer);
+        swipeContainer.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                Log.i(TAG, "swipe to refresh called...");
+                queryPosts();
+            }
+        });
 
         // steps to use the recycler view:
         // 0. create layout for one row in the list
@@ -82,8 +104,11 @@ public class PostsFragment extends Fragment {
                     Log.i(TAG, "Post: " + post.getDescription() +
                             ", Username: " + post.getUser().getUsername());
                 }
-                allPosts.addAll(posts);
-                adapter.notifyDataSetChanged();
+                adapter.clear();
+                adapter.addAll(posts);
+                swipeContainer.setRefreshing(false);
+                //allPosts.addAll(posts);
+                //adapter.notifyDataSetChanged();
 
             }
         });
